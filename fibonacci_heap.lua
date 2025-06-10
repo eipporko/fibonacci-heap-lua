@@ -93,6 +93,7 @@ local function removeMinimum(n)
     if not n then return nil end
     local trees = {}
     while true do
+        local advanceN = true
 
         if trees[n.degree] then
             local t = trees[n.degree]
@@ -109,13 +110,14 @@ local function removeMinimum(n)
                 n = t
             end
 
-            goto continue
+            advanceN = false
         else
             trees[n.degree] = n
         end
 
-        n = n.next
-        ::continue::
+        if advanceN then
+          n = n.next
+        end
     end
 
     local min = n
